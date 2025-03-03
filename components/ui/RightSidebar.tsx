@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { use } from 'react'
 import BankCard from './BankCard'
+import AnimatedCounter from './AnimatedCounter'
 
 const RightSidebar = ({ user, transactions, banks}: RightSidebarProps)=> {
   return (
