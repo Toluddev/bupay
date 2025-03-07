@@ -46,18 +46,17 @@ const AuthForm = ({ type }: { type: string }) => {
 
     try {
         //sign up with appwrite and create a plaid token
-        if(type === 'sign-up'){
-            const newUser = await signUp(data);
-
-            setUser(newUser);
+        if (type === 'sign-up') {
+          const newUser = await signUp(data);
+          
+          setUser(newUser);
         }
-
         if(type === 'sign-in'){
-            const response = await signIn({
-                email: data.email,
-                password: data.email
-            })
-            if(response) router.push('/')
+            // const response = await signIn({
+            //     email: data.email,
+            //     password: data.email
+            // })
+            // if(response) router.push('/')
             
         }
     } catch (error) {
@@ -76,17 +75,20 @@ const AuthForm = ({ type }: { type: string }) => {
         </Link>
 
         <div className='flex flex-col gap-3 md:gap-5'>
-          <h1 className='text-24 font-semibold lg:text-36 text-gray-900'>
-            {user
-              ? 'Link Account'
-              : type === 'sign-in'
-                ? 'Sign In'
-                : 'Sign Up'
-            }
-          </h1>
-          <p className='text-16 font-normal text-gray-600'>
-            {user ? 'Link Account to get started' : 'Please enter your details'}
-          </p>
+          <h1 className="text-24 lg:text-36 font-semibold text-gray-900">
+                {user 
+                  ? 'Link Account'
+                  : type === 'sign-in'
+                    ? 'Sign In'
+                    : 'Sign Up'
+                }
+                <p className="text-16 font-normal text-gray-600">
+                  {user 
+                    ? 'Link your account to get started'
+                    : 'Please enter your details'
+                  }
+                </p>  
+            </h1>
         </div>
       </header>
 
