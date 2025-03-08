@@ -5,14 +5,20 @@ import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
 import { parseStringify } from "../utils";
 
-export const signIn = async (p0: { email: string; password: string }) => {
+export const signIn = async ({ email, password }: signInProps) => {
     try {
-        
+        console.log("🟢 Attempting Sign-In with:", email);
+
+        const { account } = await createAdminClient();
+        const response = await account.createEmailPasswordSession(email, password);
+
+        console.log("✅ Sign-In Success:", response)
+        return parseStringify(response);
+
     } catch (error) {
-        console.error('error', error)
-        
+        console.error("Error:" , error);
     }
-}
+};
 
 export const signUp = async (userData : SignUpParams) => {
     const {email , password, firstName, lastName} = userData;
@@ -43,9 +49,22 @@ export const signUp = async (userData : SignUpParams) => {
 export async function getLoggedInUser() {
     try {
       const { account } = await createSessionClient();
-      return await account.get();
+      const user = await account.get();
+
+      return parseStringify(user);
     } catch (error) {
       return null;
     }
   }
   
+export const logoutAccount = async () => {
+    try {
+        const {account} = await createSessionClient();
+
+        cookies().delete('appwrite-session');
+
+        await account.deleteSession('current');
+    } catch (error) {
+        return null;
+    }
+}
