@@ -65,6 +65,8 @@ const AuthForm = ({ type }: { type: string }) => {
           const newUser = await signUp(userData);
 
           setUser(newUser);
+  
+          console.log("sign-up successful", newUser);
         }
 
         if(type === 'sign-in') {
@@ -76,7 +78,7 @@ const AuthForm = ({ type }: { type: string }) => {
           if(response) router.push('/')
         }
       } catch (error) {
-        console.log(error);
+        console.error("Signup failed:", error);
       } finally {
         setIsLoading(false);
       }
@@ -92,7 +94,7 @@ const AuthForm = ({ type }: { type: string }) => {
               height={34}
               alt="Horizon logo"
             />
-            <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1">Horizon</h1>
+            <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1">BuPay</h1>
           </Link>
 
           <div className="flex flex-col gap-1 md:gap-3">
