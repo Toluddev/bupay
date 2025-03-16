@@ -4,6 +4,8 @@ import RightSidebar from "@/components/ui/RightSidebar";
 import TotalBalanceBox from "@/components/ui/TotalBalance";
 import { getAccount, getAccounts } from "@/lib/actions/bank.actions";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
+import ChatBot from "../../components/chatbot/page";
+
 
 const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
   const currentPage = Number(page as string) || 1;
@@ -49,6 +51,8 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
         transactions={account?.transactions}
         banks={accountsData?.slice(0, 2)}
       />
+      
+      <ChatBot />
     </section>
   )
 }
